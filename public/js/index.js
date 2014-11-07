@@ -1,27 +1,25 @@
 var $ = require('jquery-browserify');
-var ws = new WebSocket('ws://localhost:8084');
+var Client = require('./client.js');
+var client = new Client();
 var idCount = 0;
-
-ws.onmessage = function(data) {
-  console.log(JSON.parse(data));
-  // flags.binary will be set if a binary data is received
-  // flags.masked will be set if the data was masked
-};
-
 
 $(window).on('load', function() {
   $('#mine').on('click', function() {
-    var command = {
-      'method': 'mine',
-      'id': idCount++
-    };
-    ws.send(JSON.stringify(command));
+    client.setMining(true);
   });
 
-  ws.onopen = function() {
-    ws.send(JSON.stringify({
-      'method': 'peers',
-      'id': idCount++
-    }));
-  };
+  client.connect(function() {
+    client.network.peers(function(p) {
+      console.log(p);
+    });
+
+    client.network.on('connect', function() {
+      console.log('connection');
+    });
+
+    client.network.on('message.hello', function(hello, peer) {
+      console.log('peer');
+    });
+
+  });
 });
