@@ -4,28 +4,29 @@
   "description": "A web based interface based on the websocket API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    "start": "bin/start.sh",
-    "build": "browserify browser/main.js | uglifyjs > static/bundle.js",
-    "watch": "watchify browser/main.js -o static/bundle.js --debug -v",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js",
+    "build": "browserify ./public/js/index.js > ./public/js/bundle.js",
+    "watch": "watchify ./public/js/index.js -o ./public/js/bundle.js --debug -v"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ethereum/ethen"
   },
   "author": "",
-  "license": "ISC",
+  "license": "GPL",
   "bugs": {
     "url": "https://github.com/ethereum/ethen/issues"
   },
   "homepage": "https://github.com/ethereum/ethen",
   "dependencies": {
-    "ethereum.js-callbacks": "git+https://github.com/wanderer/ethereum.js-callbacks",
+    "ethereumjs-rpc": "git+https://github.com/wanderer/ethereumjs-rpc",
     "express": "^4.9.8",
     "jade": "^1.7.0"
   },
   "devDependencies": {
     "browserify": "^6.2.0",
+    "uglifyjs": "^2.3.6",
     "watchify": "^2.1.1"
   }
 }

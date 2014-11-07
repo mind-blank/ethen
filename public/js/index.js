@@ -1,7 +1,6 @@
 var $ = require('jquery-browserify');
-var Client = require('./client.js');
+var Client = require('ethereumjs-rpc');
 var client = new Client();
-var idCount = 0;
 
 $(window).on('load', function() {
   $('#mine').on('click', function() {
